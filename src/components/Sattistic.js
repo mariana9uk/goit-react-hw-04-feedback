@@ -9,9 +9,9 @@ const countPositiveFeedbackPercentage = ({ good, neutral, bad }) => {
   return total ? ((good / total) * 100).toFixed(0) : 0;
 };
 
-export const Statistics = ({ stateData }) => {
-  const totalFeedback = countTotalFeedback(stateData);
-  const positiveFeedbackPercentage = countPositiveFeedbackPercentage(stateData);
+export const Statistics = ({good, neutral, bad }) => {
+  const totalFeedback = countTotalFeedback({good, neutral, bad });
+  const positiveFeedbackPercentage = countPositiveFeedbackPercentage({good, neutral, bad});
   if (totalFeedback===0) {
     return(
       <Notification/>
@@ -19,9 +19,9 @@ export const Statistics = ({ stateData }) => {
   } else {
   return (
     <Stat>
-      <span>Good:{stateData.good}</span>
-      <span>Bad:{stateData.bad}</span>
-      <span> Neutral:{stateData.neutral}</span>
+      <span>Good:{good}</span>
+      <span>Bad:{bad}</span>
+      <span> Neutral:{neutral}</span>
       <span>Total:{totalFeedback}</span>
       <span>Positive feedback:{positiveFeedbackPercentage}%</span>
     </Stat>
